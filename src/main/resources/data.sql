@@ -27,3 +27,7 @@ MERGE INTO products (id, promotion_id, name, price, image_url)
 MERGE INTO products (id, promotion_id, name, price, image_url)
     KEY (id)
     VALUES (4, 1, 'Gaming Mouse', 39.95, 'https://cdn.example.com/images/products/mouse.jpg');
+
+MERGE INTO sales (id, deep_link, image_url)
+    KEY (id)
+    VALUES (1, '/black_friday_deals', 'https://cdn.example.com/images/sales/black_friday.jpg')

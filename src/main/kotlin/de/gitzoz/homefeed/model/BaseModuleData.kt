@@ -3,7 +3,7 @@ package de.gitzoz.homefeed.model
 enum class ModuleType {
     GREETING,
     PRODUCT_PROMOTION,
-    TEASER,
+    SALE,
 }
 
 abstract class BaseModuleData(

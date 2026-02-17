@@ -32,3 +32,11 @@ CREATE TABLE IF NOT EXISTS products
 
 CREATE INDEX IF NOT EXISTS idx_products_promotion_id
     ON products (promotion_id);
+
+
+CREATE TABLE IF NOT EXISTS sales
+(
+    id        BIGINT PRIMARY KEY,
+    deep_link VARCHAR(255),
+    image_url VARCHAR(255)
+);
