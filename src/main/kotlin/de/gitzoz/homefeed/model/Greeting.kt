@@ -10,11 +10,12 @@ data class Greeting(
     val promotionLink: String
 )
 
-fun Greeting.toDto(): GreetingDto {
-    return GreetingDto(this.greetingText, this.promotionLink)
+fun Greeting.toModule(): GreetingModule {
+    return GreetingModule(this.greetingText, this.promotionLink)
 }
 
-data class GreetingDto(
+data class GreetingModule(
     val greetingText: String,
     val promotionLink: String
-)
+) : BaseModuleData(ModuleType.GREETING)
+

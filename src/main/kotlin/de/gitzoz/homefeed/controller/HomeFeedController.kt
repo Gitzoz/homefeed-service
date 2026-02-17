@@ -1,7 +1,8 @@
 package de.gitzoz.homefeed.controller
 
-import de.gitzoz.homefeed.model.GreetingDto
-import de.gitzoz.homefeed.service.GreetingService
+import de.gitzoz.homefeed.model.BaseModuleData
+import de.gitzoz.homefeed.service.GreetingModuleService
+import de.gitzoz.homefeed.service.ProductModuleService
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.springframework.web.bind.annotation.GetMapping
@@ -12,12 +13,14 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("homefeed/")
 class HomeFeedController(
-    private val greetingService: GreetingService
+    private val greetingService: GreetingModuleService,
+    private val productModuleService: ProductModuleService,
 ) {
 
     @GetMapping
-    suspend fun getHomeFeed(): GreetingDto = coroutineScope {
-        val greeting = async { greetingService.getGreeting() }
-        greeting.await()
+    suspend fun getHomeFeed(): List<BaseModuleData> = coroutineScope {
+        val greeting = async { greetingService.getModuleData() }
+        val productPromotion = async { productModuleService.getModuleData() }
+        listOf(greeting.await(), productPromotion.await())
     }
 }
