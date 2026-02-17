@@ -1,6 +1,6 @@
 package de.gitzoz.homefeed.service
 
-import de.gitzoz.homefeed.model.ModuleService
+import de.gitzoz.homefeed.service.ModuleService
 import de.gitzoz.homefeed.model.ProductPromotionModule
 import de.gitzoz.homefeed.repository.ProductPromotionRepository
 import de.gitzoz.homefeed.repository.ProductRepository

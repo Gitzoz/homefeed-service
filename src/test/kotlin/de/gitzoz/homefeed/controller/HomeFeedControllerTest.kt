@@ -8,10 +8,14 @@ import de.gitzoz.homefeed.service.ProductModuleService
 import de.gitzoz.homefeed.service.SaleModuleService
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertInstanceOf
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
+import org.springframework.http.HttpStatus
+import org.springframework.web.server.ResponseStatusException
 
 class HomeFeedControllerTest {
 
@@ -37,17 +41,21 @@ class HomeFeedControllerTest {
     }
 
     @Test
-    fun `getHomeFeed propagates exception when service fails`() = runTest {
+    fun `getHomeFeed returns 500 when service fails`() = runTest {
         val failure = RuntimeException("boom")
 
         whenever(greetingService.getModuleData()).thenThrow(failure)
 
         val controller = HomeFeedController(greetingService, productModuleService, saleService)
 
-        val exception = assertThrows(RuntimeException::class.java) {
+        val exception = assertThrows(ResponseStatusException::class.java) {
             kotlinx.coroutines.runBlocking { controller.getHomeFeed() }
         }
 
-        assertEquals("boom", exception.message)
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, exception.statusCode)
+        assertEquals("Failed to load home feed", exception.reason)
+        assertNotNull(exception.cause)
+        assertInstanceOf(RuntimeException::class.java, exception.cause)
+        assertEquals("boom", exception.cause?.message)
     }
 }

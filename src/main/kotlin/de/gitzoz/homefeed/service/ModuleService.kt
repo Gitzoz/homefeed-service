@@ -1,4 +1,6 @@
-package de.gitzoz.homefeed.model
+package de.gitzoz.homefeed.service
+
+import de.gitzoz.homefeed.model.BaseModuleData
 
 interface ModuleService<T: BaseModuleData> {
 

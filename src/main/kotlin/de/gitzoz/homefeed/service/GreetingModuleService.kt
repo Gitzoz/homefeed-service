@@ -1,7 +1,7 @@
 package de.gitzoz.homefeed.service
 
 import de.gitzoz.homefeed.model.GreetingModule
-import de.gitzoz.homefeed.model.ModuleService
+import de.gitzoz.homefeed.service.ModuleService
 import de.gitzoz.homefeed.model.toModule
 import de.gitzoz.homefeed.repository.GreetingRepository
 import kotlinx.coroutines.flow.first

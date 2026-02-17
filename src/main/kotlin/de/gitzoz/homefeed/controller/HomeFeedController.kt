@@ -22,18 +22,18 @@ class HomeFeedController(
 ) {
 
     @GetMapping
-    suspend fun getHomeFeed(): List<BaseModuleData> = coroutineScope {
-        try {
+    suspend fun getHomeFeed(): List<BaseModuleData> = try {
+        coroutineScope {
             val greeting = async { greetingService.getModuleData() }
             val productPromotion = async { productModuleService.getModuleData() }
             val sale = async { saleService.getModuleData() }
             listOf(greeting.await(), productPromotion.await(), sale.await())
-        } catch (e: Exception) {
-            throw ResponseStatusException(
-                HttpStatus.INTERNAL_SERVER_ERROR,
-                "Failed to load home feed",
-                e
-            )
         }
+    } catch (e: Exception) {
+        throw ResponseStatusException(
+            HttpStatus.INTERNAL_SERVER_ERROR,
+            "Failed to load home feed",
+            e
+        )
     }
 }
