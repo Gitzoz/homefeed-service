@@ -16,14 +16,10 @@ Tests: `./gradlew test`
 Der Endpunkt ist erreichbar unter: `http://localhost:8080/homefeed/`
 
 Ohne jq:
-```curl -X GET "http://localhost:8080/homefeed/" \
-    -H "Accept: application/json" 
-```
+```curl -X GET "http://localhost:8080/homefeed/" -H "Accept: application/json"```
 
 Mit jq:
-```curl -X GET "http://localhost:8080/homefeed/" \
-    -H "Accept: application/json" | jq
-```
+```curl -X GET "http://localhost:8080/homefeed/" -H "Accept: application/json" | jq```
 
 
 # Schritte
